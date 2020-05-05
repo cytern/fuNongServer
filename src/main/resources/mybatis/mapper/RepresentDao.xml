@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.RepresentDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Represent">
+    <id column="representId" jdbcType="INTEGER" property="representid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="representName" jdbcType="VARCHAR" property="representname" />
+    <result column="representPhone" jdbcType="VARCHAR" property="representphone" />
+    <result column="representUrl" jdbcType="VARCHAR" property="representurl" />
+    <result column="representConf" jdbcType="VARCHAR" property="representconf" />
+    <result column="representAge" jdbcType="VARCHAR" property="representage" />
+    <result column="representSex" jdbcType="VARCHAR" property="representsex" />
+    <result column="representGrade" jdbcType="INTEGER" property="representgrade" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    representId, userId, representName, representPhone, representUrl, representConf, 
+    representAge, representSex, representGrade, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from represent
+    where representId = #{representid,jdbcType=INTEGER}
+  </select>
+  <select id="getAllRepresent" resultType="com.funong.funong.pojo.Represent">
+    select * from represent;
+  </select>
+  <select id="getRepresentById" resultType="com.funong.funong.pojo.Represent">
+    select * from represent where userId=#{userid};
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from represent
+    where representId = #{representid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="representId" keyProperty="representid" parameterType="com.funong.funong.pojo.Represent" useGeneratedKeys="true">
+    insert into represent (userId, representName, representPhone, 
+      representUrl, representConf, representAge, 
+      representSex, representGrade, createTime, 
+      updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{representname,jdbcType=VARCHAR}, #{representphone,jdbcType=VARCHAR}, 
+      #{representurl,jdbcType=VARCHAR}, #{representconf,jdbcType=VARCHAR}, #{representage,jdbcType=VARCHAR}, 
+      #{representsex,jdbcType=VARCHAR}, #{representgrade,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="representId" keyProperty="representid" parameterType="com.funong.funong.pojo.Represent" useGeneratedKeys="true">
+    insert into represent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="representname != null">
+        representName,
+      </if>
+      <if test="representphone != null">
+        representPhone,
+      </if>
+      <if test="representurl != null">
+        representUrl,
+      </if>
+      <if test="representconf != null">
+        representConf,
+      </if>
+      <if test="representage != null">
+        representAge,
+      </if>
+      <if test="representsex != null">
+        representSex,
+      </if>
+      <if test="representgrade != null">
+        representGrade,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="representname != null">
+        #{representname,jdbcType=VARCHAR},
+      </if>
+      <if test="representphone != null">
+        #{representphone,jdbcType=VARCHAR},
+      </if>
+      <if test="representurl != null">
+        #{representurl,jdbcType=VARCHAR},
+      </if>
+      <if test="representconf != null">
+        #{representconf,jdbcType=VARCHAR},
+      </if>
+      <if test="representage != null">
+        #{representage,jdbcType=VARCHAR},
+      </if>
+      <if test="representsex != null">
+        #{representsex,jdbcType=VARCHAR},
+      </if>
+      <if test="representgrade != null">
+        #{representgrade,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Represent">
+    update represent
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="representname != null">
+        representName = #{representname,jdbcType=VARCHAR},
+      </if>
+      <if test="representphone != null">
+        representPhone = #{representphone,jdbcType=VARCHAR},
+      </if>
+      <if test="representurl != null">
+        representUrl = #{representurl,jdbcType=VARCHAR},
+      </if>
+      <if test="representconf != null">
+        representConf = #{representconf,jdbcType=VARCHAR},
+      </if>
+      <if test="representage != null">
+        representAge = #{representage,jdbcType=VARCHAR},
+      </if>
+      <if test="representsex != null">
+        representSex = #{representsex,jdbcType=VARCHAR},
+      </if>
+      <if test="representgrade != null">
+        representGrade = #{representgrade,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where representId = #{representid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Represent">
+    update represent
+    set userId = #{userid,jdbcType=INTEGER},
+      representName = #{representname,jdbcType=VARCHAR},
+      representPhone = #{representphone,jdbcType=VARCHAR},
+      representUrl = #{representurl,jdbcType=VARCHAR},
+      representConf = #{representconf,jdbcType=VARCHAR},
+      representAge = #{representage,jdbcType=VARCHAR},
+      representSex = #{representsex,jdbcType=VARCHAR},
+      representGrade = #{representgrade,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where representId = #{representid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.OrderDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Order">
+    <id column="orderId" jdbcType="INTEGER" property="orderid" />
+    <result column="totalPrice" jdbcType="DECIMAL" property="totalprice" />
+    <result column="customerId" jdbcType="INTEGER" property="customerid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="orderStatus" jdbcType="VARCHAR" property="orderstatus" />
+    <result column="orderConf" jdbcType="VARCHAR" property="orderconf" />
+    <result column="orderType" jdbcType="VARCHAR" property="ordertype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderId, totalPrice, customerId, createTime, updateTime, orderStatus, orderConf, 
+    orderType
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="orderId" keyProperty="orderid" parameterType="com.funong.funong.pojo.Order" useGeneratedKeys="true">
+    insert into order (totalPrice, customerId, createTime, 
+      updateTime, orderStatus, orderConf, 
+      orderType)
+    values (#{totalprice,jdbcType=DECIMAL}, #{customerid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{orderstatus,jdbcType=VARCHAR}, #{orderconf,jdbcType=VARCHAR}, 
+      #{ordertype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="orderId" keyProperty="orderid" parameterType="com.funong.funong.pojo.Order" useGeneratedKeys="true">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="totalprice != null">
+        totalPrice,
+      </if>
+      <if test="customerid != null">
+        customerId,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="orderstatus != null">
+        orderStatus,
+      </if>
+      <if test="orderconf != null">
+        orderConf,
+      </if>
+      <if test="ordertype != null">
+        orderType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstatus != null">
+        #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderconf != null">
+        #{orderconf,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertype != null">
+        #{ordertype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Order">
+    update order
+    <set>
+      <if test="totalprice != null">
+        totalPrice = #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="customerid != null">
+        customerId = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstatus != null">
+        orderStatus = #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderconf != null">
+        orderConf = #{orderconf,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertype != null">
+        orderType = #{ordertype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Order">
+    update order
+    set totalPrice = #{totalprice,jdbcType=DECIMAL},
+      customerId = #{customerid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      orderStatus = #{orderstatus,jdbcType=VARCHAR},
+      orderConf = #{orderconf,jdbcType=VARCHAR},
+      orderType = #{ordertype,jdbcType=VARCHAR}
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -7,7 +7,7 @@
     </insert>
     <update id="upDateUser" parameterType="com.funong.funong.pojo.User">
         update funong.user
-        set userName=#{userName},userPassword=#{userPassword},userStatus=#{userStatus},userType=#{userType},updateTime=#{updateTime}
+        set userPassword=#{userPassword},userStatus=#{userStatus},userType=#{userType},updateTime=#{updateTime}
         where userId=#{userId};
     </update>
     <select id="getUserById" resultType="com.funong.funong.pojo.User">

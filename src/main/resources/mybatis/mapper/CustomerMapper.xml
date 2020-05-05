@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.CustomerMapper">
+    <insert id="addCustomer" parameterType="com.funong.funong.pojo.Customer">
+        insert into funong.customer (userId, customerName, customerConf, customerUrl, customerType, customerGrade, createTime, updateTime,customerPhone)
+        values (#{userId},#{customerName},#{customerConf},#{customerUrl},#{customerType},#{customerGrade},#{createTime},#{updateTime},#{customerPhone});
+    </insert>
+    <select id="getCustomerByUserId" resultType="com.funong.funong.pojo.Customer" parameterType="int">
+        select * from funong.customer where userId=#{userId};
+    </select>
+    <select id="getAllCustomer" resultType="com.funong.funong.pojo.Customer">
+        select * from funong.customer;
+    </select>
+   <update id="updateCustomer" parameterType="com.funong.funong.pojo.Customer">
+         update funong.customer
+        set customerName=#{customerName},customerConf=#{customerConf},customerUrl=#{customerUrl},customerType=#{customerType},customerGrade=#{customerGrade},updateTime=#{updateTime},customerPhone=#{customerPhone}
+        where customerId=#{customerId};
+   </update>
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.GoodorderDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Goodorder">
+    <id column="goodOrderId" jdbcType="INTEGER" property="goodorderid" />
+    <result column="goodId" jdbcType="INTEGER" property="goodid" />
+    <result column="goodNum" jdbcType="INTEGER" property="goodnum" />
+    <result column="orderId" jdbcType="INTEGER" property="orderid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    goodOrderId, goodId, goodNum, orderId, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goodorder
+    where goodOrderId = #{goodorderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goodorder
+    where goodOrderId = #{goodorderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="goodOrderId" keyProperty="goodorderid" parameterType="com.funong.funong.pojo.Goodorder" useGeneratedKeys="true">
+    insert into goodorder (goodId, goodNum, orderId, 
+      createTime, updateTime)
+    values (#{goodid,jdbcType=INTEGER}, #{goodnum,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="goodOrderId" keyProperty="goodorderid" parameterType="com.funong.funong.pojo.Goodorder" useGeneratedKeys="true">
+    insert into goodorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodid != null">
+        goodId,
+      </if>
+      <if test="goodnum != null">
+        goodNum,
+      </if>
+      <if test="orderid != null">
+        orderId,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodid != null">
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="goodnum != null">
+        #{goodnum,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Goodorder">
+    update goodorder
+    <set>
+      <if test="goodid != null">
+        goodId = #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="goodnum != null">
+        goodNum = #{goodnum,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null">
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where goodOrderId = #{goodorderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Goodorder">
+    update goodorder
+    set goodId = #{goodid,jdbcType=INTEGER},
+      goodNum = #{goodnum,jdbcType=INTEGER},
+      orderId = #{orderid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where goodOrderId = #{goodorderid,jdbcType=INTEGER}
+  </update>
+</mapper>

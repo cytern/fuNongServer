@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.FarmerDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Farmer">
+    <id column="farmerId" jdbcType="INTEGER" property="farmerid" />
+    <result column="farmerName" jdbcType="VARCHAR" property="farmername" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="farmerAddress" jdbcType="VARCHAR" property="farmeraddress" />
+    <result column="farmerIO" jdbcType="VARCHAR" property="farmerio" />
+    <result column="farmerConf" jdbcType="VARCHAR" property="farmerconf" />
+    <result column="farmerPhone" jdbcType="VARCHAR" property="farmerphone" />
+    <result column="representId" jdbcType="INTEGER" property="representid" />
+    <result column="farmerGrade" jdbcType="INTEGER" property="farmergrade" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    farmerId, farmerName, userId, farmerAddress, farmerIO, farmerConf, farmerPhone, representId, 
+    farmerGrade, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from farmer
+    where farmerId = #{farmerid,jdbcType=INTEGER}
+  </select>
+  <select id="getAllFarmer" resultType="com.funong.funong.pojo.Farmer">
+    select * from farmar;
+  </select>
+  <select id="getFarmerByUserId" resultType="com.funong.funong.pojo.Farmer">
+    select * from farmar where userId=#{userid};
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from farmer
+    where farmerId = #{farmerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="farmerId" keyProperty="farmerid" parameterType="com.funong.funong.pojo.Farmer" useGeneratedKeys="true">
+    insert into farmer (farmerName, userId, farmerAddress, 
+      farmerIO, farmerConf, farmerPhone, 
+      representId, farmerGrade, createTime, 
+      updateTime)
+    values (#{farmername,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{farmeraddress,jdbcType=VARCHAR}, 
+      #{farmerio,jdbcType=VARCHAR}, #{farmerconf,jdbcType=VARCHAR}, #{farmerphone,jdbcType=VARCHAR}, 
+      #{representid,jdbcType=INTEGER}, #{farmergrade,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="farmerId" keyProperty="farmerid" parameterType="com.funong.funong.pojo.Farmer" useGeneratedKeys="true">
+    insert into farmer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="farmername != null">
+        farmerName,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="farmeraddress != null">
+        farmerAddress,
+      </if>
+      <if test="farmerio != null">
+        farmerIO,
+      </if>
+      <if test="farmerconf != null">
+        farmerConf,
+      </if>
+      <if test="farmerphone != null">
+        farmerPhone,
+      </if>
+      <if test="representid != null">
+        representId,
+      </if>
+      <if test="farmergrade != null">
+        farmerGrade,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="farmername != null">
+        #{farmername,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="farmeraddress != null">
+        #{farmeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerio != null">
+        #{farmerio,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerconf != null">
+        #{farmerconf,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerphone != null">
+        #{farmerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="representid != null">
+        #{representid,jdbcType=INTEGER},
+      </if>
+      <if test="farmergrade != null">
+        #{farmergrade,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Farmer">
+    update farmer
+    <set>
+      <if test="farmername != null">
+        farmerName = #{farmername,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="farmeraddress != null">
+        farmerAddress = #{farmeraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerio != null">
+        farmerIO = #{farmerio,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerconf != null">
+        farmerConf = #{farmerconf,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerphone != null">
+        farmerPhone = #{farmerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="representid != null">
+        representId = #{representid,jdbcType=INTEGER},
+      </if>
+      <if test="farmergrade != null">
+        farmerGrade = #{farmergrade,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where farmerId = #{farmerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Farmer">
+    update farmer
+    set farmerName = #{farmername,jdbcType=VARCHAR},
+      farmerAddress = #{farmeraddress,jdbcType=VARCHAR},
+      farmerIO = #{farmerio,jdbcType=VARCHAR},
+      farmerConf = #{farmerconf,jdbcType=VARCHAR},
+      farmerPhone = #{farmerphone,jdbcType=VARCHAR},
+      representId = #{representid,jdbcType=INTEGER},
+      farmerGrade = #{farmergrade,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where farmerId = #{farmerid,jdbcType=INTEGER}
+  </update>
+
+</mapper>

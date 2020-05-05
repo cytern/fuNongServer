@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.GoodDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Good">
+    <id column="goodId" jdbcType="INTEGER" property="goodid" />
+    <result column="goodName" jdbcType="VARCHAR" property="goodname" />
+    <result column="goodStatus" jdbcType="VARCHAR" property="goodstatus" />
+    <result column="farmerId" jdbcType="INTEGER" property="farmerid" />
+    <result column="goodPrice" jdbcType="DECIMAL" property="goodprice" />
+    <result column="goodLocation" jdbcType="VARCHAR" property="goodlocation" />
+    <result column="representId" jdbcType="INTEGER" property="representid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="goodNum" jdbcType="INTEGER" property="goodnum" />
+    <result column="goodSize" jdbcType="VARCHAR" property="goodsize" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    goodId, goodName, goodStatus, farmerId, goodPrice, goodLocation, representId, createTime, 
+    updateTime, goodNum, goodSize
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from good
+    where goodId = #{goodid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from good
+    where goodId = #{goodid,jdbcType=INTEGER}
+  </delete>
+  <select id="getAllGood" parameterType="com.funong.funong.backPojo.BackPageIndex" resultType="com.funong.funong.pojo.Good">
+    select * from good
+    limit  #{start},#{end};
+  </select>
+  <select id="getNum" resultType="int">
+    select count(*) from good;
+  </select>
+  <insert id="insert" keyColumn="goodId" keyProperty="goodid" parameterType="com.funong.funong.pojo.Good" useGeneratedKeys="true">
+    insert into good (goodName, goodStatus, farmerId, 
+      goodPrice, goodLocation, representId, 
+      createTime, updateTime, goodNum, 
+      goodSize, goodUrl)
+    values (#{goodname,jdbcType=VARCHAR}, #{goodstatus,jdbcType=VARCHAR}, #{farmerid,jdbcType=INTEGER}, 
+      #{goodprice,jdbcType=DECIMAL}, #{goodlocation,jdbcType=VARCHAR}, #{representid,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{goodnum,jdbcType=INTEGER}, 
+      #{goodsize,jdbcType=VARCHAR},#{goodurl})
+  </insert>
+  <insert id="insertSelective" keyColumn="goodId" keyProperty="goodid" parameterType="com.funong.funong.pojo.Good" useGeneratedKeys="true">
+    insert into good
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodname != null">
+        goodName,
+      </if>
+      <if test="goodstatus != null">
+        goodStatus,
+      </if>
+      <if test="farmerid != null">
+        farmerId,
+      </if>
+      <if test="goodprice != null">
+        goodPrice,
+      </if>
+      <if test="goodlocation != null">
+        goodLocation,
+      </if>
+      <if test="representid != null">
+        representId,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="goodnum != null">
+        goodNum,
+      </if>
+      <if test="goodsize != null">
+        goodSize,
+      </if>
+      <if test="goodurl != null">
+        goodUrl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodname != null">
+        #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstatus != null">
+        #{goodstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerid != null">
+        #{farmerid,jdbcType=INTEGER},
+      </if>
+      <if test="goodprice != null">
+        #{goodprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodlocation != null">
+        #{goodlocation,jdbcType=VARCHAR},
+      </if>
+      <if test="representid != null">
+        #{representid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodnum != null">
+        #{goodnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsize != null">
+        #{goodsize,jdbcType=VARCHAR},
+      </if>
+      <if test="goodurl != null">
+        #{goodurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Good">
+    update good
+    <set>
+      <if test="goodname != null">
+        goodName = #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstatus != null">
+        goodStatus = #{goodstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerid != null">
+        farmerId = #{farmerid,jdbcType=INTEGER},
+      </if>
+      <if test="goodprice != null">
+        goodPrice = #{goodprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodlocation != null">
+        goodLocation = #{goodlocation,jdbcType=VARCHAR},
+      </if>
+      <if test="representid != null">
+        representId = #{representid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodnum != null">
+        goodNum = #{goodnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsize != null">
+        goodSize = #{goodsize,jdbcType=VARCHAR},
+      </if>
+      <if test="goodurl != null">
+        goodUrl = #{goodurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goodId = #{goodid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Good">
+    update good
+    set goodName = #{goodname,jdbcType=VARCHAR},
+      goodStatus = #{goodstatus,jdbcType=VARCHAR},
+      farmerId = #{farmerid,jdbcType=INTEGER},
+      goodPrice = #{goodprice,jdbcType=DECIMAL},
+      goodLocation = #{goodlocation,jdbcType=VARCHAR},
+      representId = #{representid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      goodNum = #{goodnum,jdbcType=INTEGER},
+      goodSize = #{goodsize,jdbcType=VARCHAR},
+        goodUrl = #{goodurl,jdbcType=VARCHAR}
+    where goodId = #{goodid,jdbcType=INTEGER}
+  </update>
+</mapper>

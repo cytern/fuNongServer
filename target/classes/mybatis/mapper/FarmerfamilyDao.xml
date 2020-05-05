@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.FarmerfamilyDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Farmerfamily">
+    <id column="farmerFamilyId" jdbcType="INTEGER" property="farmerfamilyid" />
+    <result column="farmerId" jdbcType="INTEGER" property="farmerid" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="relationShip" jdbcType="VARCHAR" property="relationship" />
+    <result column="work" jdbcType="VARCHAR" property="work" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    farmerFamilyId, farmerId, `Name`, sex, relationShip, `work`, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from farmerfamily
+    where farmerFamilyId = #{farmerfamilyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from farmerfamily
+    where farmerFamilyId = #{farmerfamilyid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="farmerFamilyId" keyProperty="farmerfamilyid" parameterType="com.funong.funong.pojo.Farmerfamily" useGeneratedKeys="true">
+    insert into farmerfamily (farmerId, `Name`, sex, 
+      relationShip, `work`, createTime, 
+      updateTime)
+    values (#{farmerid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{relationship,jdbcType=VARCHAR}, #{work,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="farmerFamilyId" keyProperty="farmerfamilyid" parameterType="com.funong.funong.pojo.Farmerfamily" useGeneratedKeys="true">
+    insert into farmerfamily
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="farmerid != null">
+        farmerId,
+      </if>
+      <if test="name != null">
+        `Name`,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="relationship != null">
+        relationShip,
+      </if>
+      <if test="work != null">
+        `work`,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="farmerid != null">
+        #{farmerid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null">
+        #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Farmerfamily">
+    update farmerfamily
+    <set>
+      <if test="farmerid != null">
+        farmerId = #{farmerid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `Name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        relationShip = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null">
+        `work` = #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where farmerFamilyId = #{farmerfamilyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Farmerfamily">
+    update farmerfamily
+    set farmerId = #{farmerid,jdbcType=INTEGER},
+      `Name` = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      relationShip = #{relationship,jdbcType=VARCHAR},
+      `work` = #{work,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where farmerFamilyId = #{farmerfamilyid,jdbcType=INTEGER}
+  </update>
+</mapper>

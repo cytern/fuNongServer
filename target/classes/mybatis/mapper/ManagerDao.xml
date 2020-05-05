@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.ManagerDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Manager">
+    <id column="managerId" jdbcType="INTEGER" property="managerid" />
+    <result column="managerName" jdbcType="VARCHAR" property="managername" />
+    <result column="managerSex" jdbcType="VARCHAR" property="managersex" />
+    <result column="managerConf" jdbcType="VARCHAR" property="managerconf" />
+    <result column="managerAge" jdbcType="VARCHAR" property="managerage" />
+    <result column="managerUrl" jdbcType="VARCHAR" property="managerurl" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    managerId, managerName, managerSex, managerConf, managerAge, managerUrl, createTime, 
+    updateTime, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manager
+    where managerId = #{managerid,jdbcType=INTEGER}
+  </select>
+  <select id="getAllManager" resultType="com.funong.funong.pojo.Manager">
+    select * from manager;
+  </select>
+  <select id="getManagerByUserId" resultType="com.funong.funong.pojo.Manager">
+    select * from manager where userId=#{userid};
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from manager
+    where managerId = #{managerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="managerId" keyProperty="managerid" parameterType="com.funong.funong.pojo.Manager" useGeneratedKeys="true">
+    insert into manager (managerName, managerSex, managerConf, 
+      managerAge, managerUrl, createTime, 
+      updateTime, userId)
+    values (#{managername,jdbcType=VARCHAR}, #{managersex,jdbcType=VARCHAR}, #{managerconf,jdbcType=VARCHAR}, 
+      #{managerage,jdbcType=VARCHAR}, #{managerurl,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="managerId" keyProperty="managerid" parameterType="com.funong.funong.pojo.Manager" useGeneratedKeys="true">
+    insert into manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="managername != null">
+        managerName,
+      </if>
+      <if test="managersex != null">
+        managerSex,
+      </if>
+      <if test="managerconf != null">
+        managerConf,
+      </if>
+      <if test="managerage != null">
+        managerAge,
+      </if>
+      <if test="managerurl != null">
+        managerUrl,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="managername != null">
+        #{managername,jdbcType=VARCHAR},
+      </if>
+      <if test="managersex != null">
+        #{managersex,jdbcType=VARCHAR},
+      </if>
+      <if test="managerconf != null">
+        #{managerconf,jdbcType=VARCHAR},
+      </if>
+      <if test="managerage != null">
+        #{managerage,jdbcType=VARCHAR},
+      </if>
+      <if test="managerurl != null">
+        #{managerurl,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Manager">
+    update manager
+    <set>
+      <if test="managername != null">
+        managerName = #{managername,jdbcType=VARCHAR},
+      </if>
+      <if test="managersex != null">
+        managerSex = #{managersex,jdbcType=VARCHAR},
+      </if>
+      <if test="managerconf != null">
+        managerConf = #{managerconf,jdbcType=VARCHAR},
+      </if>
+      <if test="managerage != null">
+        managerAge = #{managerage,jdbcType=VARCHAR},
+      </if>
+      <if test="managerurl != null">
+        managerUrl = #{managerurl,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where managerId = #{managerid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Manager">
+    update manager
+    set managerName = #{managername,jdbcType=VARCHAR},
+      managerSex = #{managersex,jdbcType=VARCHAR},
+      managerConf = #{managerconf,jdbcType=VARCHAR},
+      managerAge = #{managerage,jdbcType=VARCHAR},
+      managerUrl = #{managerurl,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      userId = #{userid,jdbcType=INTEGER}
+    where managerId = #{managerid,jdbcType=INTEGER}
+  </update>
+</mapper>

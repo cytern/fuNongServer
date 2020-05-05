@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.RootDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Root">
+    <result column="rootId" jdbcType="VARCHAR" property="rootid" />
+    <result column="rootName" jdbcType="VARCHAR" property="rootname" />
+    <result column="rootUrl" jdbcType="VARCHAR" property="rooturl" />
+    <result column="rootConf" jdbcType="VARCHAR" property="rootconf" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="rootPhone" jdbcType="VARCHAR" property="rootphone" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.funong.funong.pojo.Root">
+    insert into root (rootId, rootName, rootUrl, 
+      rootConf, userId, rootPhone, 
+      createTime, updateTime)
+    values (#{rootid,jdbcType=VARCHAR}, #{rootname,jdbcType=VARCHAR}, #{rooturl,jdbcType=VARCHAR}, 
+      #{rootconf,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{rootphone,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="getAllRoot" resultType="com.funong.funong.pojo.Root">
+    select * from root;
+  </select>
+  <select id="getRootByUserId" resultType="com.funong.funong.pojo.Root">
+    select * from root where userId=#{userid};
+  </select>
+  <insert id="insertSelective" parameterType="com.funong.funong.pojo.Root">
+    insert into root
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rootid != null">
+        rootId,
+      </if>
+      <if test="rootname != null">
+        rootName,
+      </if>
+      <if test="rooturl != null">
+        rootUrl,
+      </if>
+      <if test="rootconf != null">
+        rootConf,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="rootphone != null">
+        rootPhone,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rootid != null">
+        #{rootid,jdbcType=VARCHAR},
+      </if>
+      <if test="rootname != null">
+        #{rootname,jdbcType=VARCHAR},
+      </if>
+      <if test="rooturl != null">
+        #{rooturl,jdbcType=VARCHAR},
+      </if>
+      <if test="rootconf != null">
+        #{rootconf,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="rootphone != null">
+        #{rootphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
