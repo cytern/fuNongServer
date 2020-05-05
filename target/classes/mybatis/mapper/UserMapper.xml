@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.UserMapper">
+    <insert id="addUser" parameterType="com.funong.funong.pojo.User">
+        insert into funong.user (userName, userPassword, userStatus, userType, createTime, updateTime)
+        values (#{userName},#{userPassword},#{userStatus},#{userType},#{createTime},#{updateTime});
+    </insert>
+    <update id="upDateUser" parameterType="com.funong.funong.pojo.User">
+        update funong.user
+        set userName=#{userName},userPassword=#{userPassword},userStatus=#{userStatus},userType=#{userType},updateTime=#{updateTime}
+        where userId=#{userId};
+    </update>
+    <select id="getUserById" resultType="com.funong.funong.pojo.User">
+        select * from funong.user where userId=#{userId};
+    </select>
+    <select id="getUserByName" resultType="com.funong.funong.pojo.User">
+        select * from funong.user where userName = #{userName};
+    </select>
+    <select id="getAllUser" resultType="com.funong.funong.pojo.User">
+        select * from funong.user;
+    </select>
+</mapper>
