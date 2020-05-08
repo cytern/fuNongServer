@@ -16,10 +16,16 @@
     from advice
     where advice_id = #{adviceId,jdbcType=INTEGER}
   </select>
+  <select id="getAllAdvice" resultMap="BaseResultMap">
+    select * from advice;
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from advice
     where advice_id = #{adviceId,jdbcType=INTEGER}
   </delete>
+  <select id="getAdviceByType" parameterType="String" resultType="com.funong.funong.pojo.Advice">
+    select * from advice where good_type = #{goodType};
+  </select>
   <insert id="insert" keyColumn="advice_id" keyProperty="adviceId" parameterType="com.funong.funong.pojo.Advice" useGeneratedKeys="true">
     insert into advice (goodId, good_type, create_time
       )

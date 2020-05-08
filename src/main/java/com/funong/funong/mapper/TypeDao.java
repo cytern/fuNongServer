@@ -1,7 +1,12 @@
 package com.funong.funong.mapper;
 
 import com.funong.funong.pojo.Type;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Mapper
+@Repository
 public interface TypeDao {
     int deleteByPrimaryKey(Integer typeId);
 
@@ -14,4 +19,8 @@ public interface TypeDao {
     int updateByPrimaryKeySelective(Type record);
 
     int updateByPrimaryKey(Type record);
+
+    Type selectByTypeName(String typeName);
+
+    List<Type> getAllType();
 }

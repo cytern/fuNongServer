@@ -15,6 +15,9 @@
     from img
     where img_url = #{imgUrl,jdbcType=VARCHAR}
   </select>
+  <select id="getAllImg" resultMap="BaseResultMap">
+    select * from img;
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from img
     where img_url = #{imgUrl,jdbcType=VARCHAR}

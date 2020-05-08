@@ -16,6 +16,12 @@
     from type
     where type_id = #{typeId,jdbcType=INTEGER}
   </select>
+  <select id="selectByTypeName" parameterType="String" resultMap="BaseResultMap">
+    select * from type where type_name = #{typeName};
+  </select>
+  <select id="getAllType" resultMap="BaseResultMap">
+    select * from type;
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from type
     where type_id = #{typeId,jdbcType=INTEGER}

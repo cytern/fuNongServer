@@ -3,6 +3,8 @@ package com.funong.funong.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -24,9 +26,9 @@ public class Good implements Serializable {
     private String goodlocation;
 
     private Integer representid;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createtime;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updatetime;
 
     private Integer goodnum;
@@ -34,6 +36,8 @@ public class Good implements Serializable {
     private String goodsize;
 
     private String goodurl;
+
+    private String goodtype;
 
     private static final long serialVersionUID = 1L;
 }

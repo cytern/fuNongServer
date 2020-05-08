@@ -3,6 +3,30 @@
   <component name="PersistentConfig">
     <option name="historyConfigList">
       <map>
+        <entry key="advice">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="AdviceDao" />
+              <option name="daoPackage" value="com.funong.funong.mapper" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="Advice" />
+              <option name="modelPackage" value="com.funong.funong.pojo" />
+              <option name="name" value="advice" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="advice_id" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="advice" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources/mybatis" />
+              <option name="xmlPackage" value="mapper" />
+            </Config>
+          </value>
+        </entry>
         <entry key="farmer">
           <value>
             <Config>
@@ -99,6 +123,30 @@
             </Config>
           </value>
         </entry>
+        <entry key="img">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="ImgDao" />
+              <option name="daoPackage" value="com.funong.funong.mapper" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="Img" />
+              <option name="modelPackage" value="com.funong.funong.pojo" />
+              <option name="name" value="img" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="img_url" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="img" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="mybatis.mapper" />
+            </Config>
+          </value>
+        </entry>
         <entry key="manager">
           <value>
             <Config>
@@ -189,6 +237,30 @@
               <option name="primaryKey" value="" />
               <option name="projectFolder" value="$PROJECT_DIR$" />
               <option name="tableName" value="root" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="mapper" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="type">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="TypeDao" />
+              <option name="daoPackage" value="com.funong.funong.mapper" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="Type" />
+              <option name="modelPackage" value="com.funong.funong.pojo" />
+              <option name="name" value="type" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="type_id" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="type" />
               <option name="useLombokPlugin" value="true" />
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />

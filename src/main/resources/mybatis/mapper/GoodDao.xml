@@ -13,16 +13,24 @@
     <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="goodNum" jdbcType="INTEGER" property="goodnum" />
     <result column="goodSize" jdbcType="VARCHAR" property="goodsize" />
+    <result column="goodType" jdbcType="VARCHAR" property="goodtype" />
   </resultMap>
   <sql id="Base_Column_List">
     goodId, goodName, goodStatus, farmerId, goodPrice, goodLocation, representId, createTime, 
-    updateTime, goodNum, goodSize
+    updateTime, goodNum, goodSize ,goodType
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from good
     where goodId = #{goodid,jdbcType=INTEGER}
+  </select>
+  <select id="getGood" resultMap="BaseResultMap" parameterType="com.funong.funong.backPojo.BackTypeIndex">
+      select * from good where goodType = #{type}
+    limit  #{start},#{end};
+  </select>
+  <select id="getGoodByGoodName" resultMap="BaseResultMap" >
+    select * from  good where goodName = #{goodname};
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from good
@@ -39,11 +47,11 @@
     insert into good (goodName, goodStatus, farmerId, 
       goodPrice, goodLocation, representId, 
       createTime, updateTime, goodNum, 
-      goodSize, goodUrl)
+      goodSize, goodUrl, goodType)
     values (#{goodname,jdbcType=VARCHAR}, #{goodstatus,jdbcType=VARCHAR}, #{farmerid,jdbcType=INTEGER}, 
       #{goodprice,jdbcType=DECIMAL}, #{goodlocation,jdbcType=VARCHAR}, #{representid,jdbcType=INTEGER}, 
       #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{goodnum,jdbcType=INTEGER}, 
-      #{goodsize,jdbcType=VARCHAR},#{goodurl})
+      #{goodsize,jdbcType=VARCHAR},#{goodurl},#{goodtype})
   </insert>
   <insert id="insertSelective" keyColumn="goodId" keyProperty="goodid" parameterType="com.funong.funong.pojo.Good" useGeneratedKeys="true">
     insert into good
@@ -81,6 +89,9 @@
       <if test="goodurl != null">
         goodUrl,
       </if>
+      <if test="goodtype != null">
+        goodType,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="goodname != null">
@@ -115,6 +126,9 @@
       </if>
       <if test="goodurl != null">
         #{goodurl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodtype != null">
+        #{goodtype,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -154,6 +168,9 @@
       <if test="goodurl != null">
         goodUrl = #{goodurl,jdbcType=VARCHAR},
       </if>
+      <if test="goodtype != null">
+        goodType = #{goodtype,jdbcType=VARCHAR},
+      </if>
     </set>
     where goodId = #{goodid,jdbcType=INTEGER}
   </update>
@@ -169,7 +186,8 @@
       updateTime = #{updatetime,jdbcType=TIMESTAMP},
       goodNum = #{goodnum,jdbcType=INTEGER},
       goodSize = #{goodsize,jdbcType=VARCHAR},
-        goodUrl = #{goodurl,jdbcType=VARCHAR}
+        goodUrl = #{goodurl,jdbcType=VARCHAR},
+           goodType = #{goodtype,jdbcType=VARCHAR}
     where goodId = #{goodid,jdbcType=INTEGER}
   </update>
 </mapper>

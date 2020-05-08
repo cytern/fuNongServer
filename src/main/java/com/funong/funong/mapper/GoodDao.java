@@ -1,6 +1,7 @@
 package com.funong.funong.mapper;
 
 import com.funong.funong.backPojo.BackPageIndex;
+import com.funong.funong.backPojo.BackTypeIndex;
 import com.funong.funong.pojo.Good;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -24,5 +25,9 @@ public interface GoodDao {
     List<Good> getAllGood(BackPageIndex backPageIndex);
 
     int getNum();
+
+    List<Good> getGood(BackTypeIndex backTypeIndex);
+
+    Good getGoodByGoodName(String goodname);
 
 }
