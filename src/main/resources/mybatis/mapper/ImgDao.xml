@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.ImgDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Img">
+    <id column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="img_status" jdbcType="VARCHAR" property="imgStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    img_url, create_time, img_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from img
+    where img_url = #{imgUrl,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from img
+    where img_url = #{imgUrl,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="img_url" keyProperty="imgUrl" parameterType="com.funong.funong.pojo.Img" useGeneratedKeys="true">
+    insert into img (create_time, img_status)
+    values (#{createTime,jdbcType=TIMESTAMP}, #{imgStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="img_url" keyProperty="imgUrl" parameterType="com.funong.funong.pojo.Img" useGeneratedKeys="true">
+    insert into img
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="imgStatus != null">
+        img_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgStatus != null">
+        #{imgStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Img">
+    update img
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgStatus != null">
+        img_status = #{imgStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where img_url = #{imgUrl,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Img">
+    update img
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      img_status = #{imgStatus,jdbcType=VARCHAR}
+    where img_url = #{imgUrl,jdbcType=VARCHAR}
+  </update>
+</mapper>

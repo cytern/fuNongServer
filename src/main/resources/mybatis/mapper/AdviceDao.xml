@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.AdviceDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Advice">
+    <id column="advice_id" jdbcType="INTEGER" property="adviceId" />
+    <result column="goodId" jdbcType="INTEGER" property="goodid" />
+    <result column="good_type" jdbcType="VARCHAR" property="goodType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    advice_id, goodId, good_type, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from advice
+    where advice_id = #{adviceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from advice
+    where advice_id = #{adviceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="advice_id" keyProperty="adviceId" parameterType="com.funong.funong.pojo.Advice" useGeneratedKeys="true">
+    insert into advice (goodId, good_type, create_time
+      )
+    values (#{goodid,jdbcType=INTEGER}, #{goodType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="advice_id" keyProperty="adviceId" parameterType="com.funong.funong.pojo.Advice" useGeneratedKeys="true">
+    insert into advice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodid != null">
+        goodId,
+      </if>
+      <if test="goodType != null">
+        good_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodid != null">
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="goodType != null">
+        #{goodType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Advice">
+    update advice
+    <set>
+      <if test="goodid != null">
+        goodId = #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="goodType != null">
+        good_type = #{goodType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where advice_id = #{adviceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Advice">
+    update advice
+    set goodId = #{goodid,jdbcType=INTEGER},
+      good_type = #{goodType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where advice_id = #{adviceId,jdbcType=INTEGER}
+  </update>
+</mapper>
