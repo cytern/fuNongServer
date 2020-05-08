@@ -41,8 +41,10 @@ com\funong\funong\pojo\Represent.class
 com\funong\funong\controller\CustomerController.class
 com\funong\funong\mapper\ImgDao.class
 com\funong\funong\pojo\Good.class
+com\funong\funong\controller\UserController.class
 com\funong\funong\service\UserServiceImpl.class
 com\funong\funong\pojo\Goodorder.class
+com\funong\funong\backPojo\BackOrder.class
 com\funong\funong\plugin\ChangeDate.class
 com\funong\funong\controller\GoodController.class
 com\funong\funong\plugin\GetPageIndex.class

@@ -9,4 +9,5 @@ public interface CustomerService {
     Customer getCustomerByUserId(int userId);
     int updateCustomer(Customer customer);
     int addCustomer(Customer customer);
+    Customer getCustomerByCustomerId(int customerId);
 }

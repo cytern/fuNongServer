@@ -8,6 +8,9 @@
     <select id="getCustomerByUserId" resultType="com.funong.funong.pojo.Customer" parameterType="int">
         select * from funong.customer where userId=#{userId};
     </select>
+    <select id="getCustomerByCustomerId" resultType="com.funong.funong.pojo.Customer" parameterType="int">
+        select * from funong.customer where  customerId =#{customerId};
+    </select>
     <select id="getAllCustomer" resultType="com.funong.funong.pojo.Customer">
         select * from funong.customer;
     </select>

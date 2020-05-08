@@ -110,7 +110,7 @@ public class GoodController {
     }
 
     @PostMapping("represent/addGood")
-    private HashMap<Object, Object> addGood(Good good) {
+    private HashMap<Object, Object> addGood(@RequestBody Good good) {
         HashMap<Object, Object> hashMap = new HashMap<>();
         Date createTime = changeDate.getDate();
         good.setCreatetime(createTime);

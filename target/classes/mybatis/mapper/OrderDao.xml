@@ -26,8 +26,18 @@
     select * from funong.order where customerId = #{id} and orderstatus = #{type}
      limit  #{start},#{end};
   </select>
+  <select id="getOrderByRepresentIdType" parameterType="com.funong.funong.backPojo.BackTypeIndex" resultMap="BaseResultMap">
+    select * from funong.order where  representId=#{id} and  orderStatus = #{type}
+  limit  #{start},#{end};
+  </select>
+  <select id="getNumCustomerIdType" parameterType="com.funong.funong.backPojo.BackTypeIndex" resultType="int">
+    select count(*) from funong.order where customerId=#{id} and orderStatus = #{type};
+  </select>
+  <select id="getNumRepresentIdType" parameterType="com.funong.funong.backPojo.BackTypeIndex" resultType="int">
+    select count(*) from funong.order where representId=#{id} and orderStatus = #{type};
+  </select>
     <select id="getOrderByOrderType" resultMap="BaseResultMap" parameterType="com.funong.funong.backPojo.BackTypeIndex">
-      select * from funong.order where orderstatus = #{type}
+      select * from funong.order where orderStatus = #{type}
       limit  #{start},#{end};
     </select>
   <select id="getNumAll" resultType="int">
@@ -48,7 +58,7 @@
     select count(*) from funong.order where representId =#{representId};
   </select>
   <select id="getNumType" parameterType="String" resultType="java.lang.Integer">
-    select count(*) from funong.order where orderstatus = #{orderType};
+    select count(*) from funong.order where orderStatus = #{orderType};
   </select>
   <select id="getOrderByCustomerId" resultMap="BaseResultMap"  parameterType="com.funong.funong.backPojo.BackTypeIndex" >
     select * from funong.order where customerId = #{type};
@@ -57,13 +67,13 @@
     delete from funong.order
     where orderId = #{orderid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="orderId" keyProperty="orderid" parameterType="com.funong.funong.pojo.Order" useGeneratedKeys="true">
+  <insert id="insert"  keyProperty="orderid"  keyColumn="orderId" parameterType="com.funong.funong.pojo.Order" useGeneratedKeys="true">
     insert into funong.order (totalPrice, customerId, createTime,
       updateTime, orderStatus, orderConf, 
       orderType, representId)
     values (#{totalprice,jdbcType=DECIMAL}, #{customerid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
       #{updatetime,jdbcType=TIMESTAMP}, #{orderstatus,jdbcType=VARCHAR}, #{orderconf,jdbcType=VARCHAR}, 
-      #{ordertype,jdbcType=VARCHAR},#{represnetid})
+      #{ordertype,jdbcType=VARCHAR},#{representid});
   </insert>
   <insert id="insertSelective" keyColumn="orderId" keyProperty="orderid" parameterType="com.funong.funong.pojo.Order" useGeneratedKeys="true">
     insert into funong.order
@@ -90,8 +100,9 @@
         orderType,
       </if>
       <if test="representid != null">
-        orderType,
+        representId,
       </if>
+
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="totalprice != null">
@@ -116,7 +127,7 @@
         #{ordertype,jdbcType=VARCHAR},
       </if>
       <if test="representid != null">
-        #{representId,jdbcType=VARCHAR},
+        #{representid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

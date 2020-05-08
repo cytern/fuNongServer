@@ -18,6 +18,27 @@
     from goodorder
     where goodOrderId = #{goodorderid,jdbcType=INTEGER}
   </select>
+  <select id="getAll" resultMap="BaseResultMap" parameterType="com.funong.funong.backPojo.BackTypeIndex">
+    select * from goodorder;
+  </select>
+  <select id="getNumAll" resultType="int">
+    select count(*) from goodorder;
+  </select>
+  <select id="getByGoodId" resultMap="BaseResultMap" parameterType="com.funong.funong.backPojo.BackTypeIndex">
+    select * from goodorder where goodId = #{id};
+  </select>
+  <select id="getNumGoodId" resultType="int" parameterType="com.funong.funong.backPojo.BackTypeIndex">
+      select count(*) from goodorder where goodId = #{id};
+  </select>
+  <select id="getByOrderId" resultMap="BaseResultMap" parameterType="com.funong.funong.backPojo.BackTypeIndex">
+    select * from goodorder where orderId = #{id};
+  </select>
+  <select id="getNumOrderId" resultType="int" parameterType="com.funong.funong.backPojo.BackTypeIndex">
+      select count(*) from goodorder where orderId = #{id};
+  </select>
+  <select id="getAllShit" resultMap="BaseResultMap" parameterType="int">
+    select * from goodorder where orderId = #{orderId};
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from goodorder
     where goodOrderId = #{goodorderid,jdbcType=INTEGER}
