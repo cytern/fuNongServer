@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.TechDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Tech">
+    <id column="tech_id" jdbcType="INTEGER" property="techId" />
+    <result column="tech_title" jdbcType="VARCHAR" property="techTitle" />
+    <result column="tech_body" jdbcType="VARCHAR" property="techBody" />
+    <result column="tech_tag" jdbcType="VARCHAR" property="techTag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tech_id, tech_title, tech_body, tech_tag, create_time, update_time, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tech
+    where tech_id = #{techId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tech
+    where tech_id = #{techId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="tech_id" keyProperty="techId" parameterType="com.funong.funong.pojo.Tech" useGeneratedKeys="true">
+    insert into tech (tech_title, tech_body, tech_tag, 
+      create_time, update_time, user_id
+      )
+    values (#{techTitle,jdbcType=VARCHAR}, #{techBody,jdbcType=VARCHAR}, #{techTag,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="tech_id" keyProperty="techId" parameterType="com.funong.funong.pojo.Tech" useGeneratedKeys="true">
+    insert into tech
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="techTitle != null">
+        tech_title,
+      </if>
+      <if test="techBody != null">
+        tech_body,
+      </if>
+      <if test="techTag != null">
+        tech_tag,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="techTitle != null">
+        #{techTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="techBody != null">
+        #{techBody,jdbcType=VARCHAR},
+      </if>
+      <if test="techTag != null">
+        #{techTag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Tech">
+    update tech
+    <set>
+      <if test="techTitle != null">
+        tech_title = #{techTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="techBody != null">
+        tech_body = #{techBody,jdbcType=VARCHAR},
+      </if>
+      <if test="techTag != null">
+        tech_tag = #{techTag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tech_id = #{techId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Tech">
+    update tech
+    set tech_title = #{techTitle,jdbcType=VARCHAR},
+      tech_body = #{techBody,jdbcType=VARCHAR},
+      tech_tag = #{techTag,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER}
+    where tech_id = #{techId,jdbcType=INTEGER}
+  </update>
+</mapper>

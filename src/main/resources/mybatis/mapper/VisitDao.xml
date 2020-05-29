@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.funong.funong.mapper.VisitDao">
+  <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Visit">
+    <id column="visit_id" jdbcType="INTEGER" property="visitId" />
+    <result column="represent_id" jdbcType="INTEGER" property="representId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="farmer_id" jdbcType="INTEGER" property="farmerId" />
+    <result column="visit_url" jdbcType="VARCHAR" property="visitUrl" />
+    <result column="visit_conf" jdbcType="VARCHAR" property="visitConf" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    visit_id, represent_id, create_time, update_time, farmer_id, visit_url, visit_conf
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from visit
+    where visit_id = #{visitId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from visit
+    where visit_id = #{visitId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="visit_id" keyProperty="visitId" parameterType="com.funong.funong.pojo.Visit" useGeneratedKeys="true">
+    insert into visit (represent_id, create_time, update_time, 
+      farmer_id, visit_url, visit_conf
+      )
+    values (#{representId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{farmerId,jdbcType=INTEGER}, #{visitUrl,jdbcType=VARCHAR}, #{visitConf,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="visit_id" keyProperty="visitId" parameterType="com.funong.funong.pojo.Visit" useGeneratedKeys="true">
+    insert into visit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="representId != null">
+        represent_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="farmerId != null">
+        farmer_id,
+      </if>
+      <if test="visitUrl != null">
+        visit_url,
+      </if>
+      <if test="visitConf != null">
+        visit_conf,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="representId != null">
+        #{representId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="farmerId != null">
+        #{farmerId,jdbcType=INTEGER},
+      </if>
+      <if test="visitUrl != null">
+        #{visitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="visitConf != null">
+        #{visitConf,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Visit">
+    update visit
+    <set>
+      <if test="representId != null">
+        represent_id = #{representId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="farmerId != null">
+        farmer_id = #{farmerId,jdbcType=INTEGER},
+      </if>
+      <if test="visitUrl != null">
+        visit_url = #{visitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="visitConf != null">
+        visit_conf = #{visitConf,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where visit_id = #{visitId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Visit">
+    update visit
+    set represent_id = #{representId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      farmer_id = #{farmerId,jdbcType=INTEGER},
+      visit_url = #{visitUrl,jdbcType=VARCHAR},
+      visit_conf = #{visitConf,jdbcType=VARCHAR}
+    where visit_id = #{visitId,jdbcType=INTEGER}
+  </update>
+</mapper>

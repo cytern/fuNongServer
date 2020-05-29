@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.funong.funong.mapper.RootDao">
   <resultMap id="BaseResultMap" type="com.funong.funong.pojo.Root">
-    <result column="rootId" jdbcType="VARCHAR" property="rootid" />
+    <id column="rootId" jdbcType="INTEGER" property="rootid" />
     <result column="rootName" jdbcType="VARCHAR" property="rootname" />
     <result column="rootUrl" jdbcType="VARCHAR" property="rooturl" />
     <result column="rootConf" jdbcType="VARCHAR" property="rootconf" />
@@ -11,26 +11,30 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
   </resultMap>
-  <insert id="insert" parameterType="com.funong.funong.pojo.Root">
-    insert into root (rootId, rootName, rootUrl, 
-      rootConf, userId, rootPhone, 
-      createTime, updateTime)
-    values (#{rootid,jdbcType=VARCHAR}, #{rootname,jdbcType=VARCHAR}, #{rooturl,jdbcType=VARCHAR}, 
-      #{rootconf,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{rootphone,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  <sql id="Base_Column_List">
+    rootId, rootName, rootUrl, rootConf, userId, rootPhone, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from root
+    where rootId = #{rootid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from root
+    where rootId = #{rootid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="rootId" keyProperty="rootid" parameterType="com.funong.funong.pojo.Root" useGeneratedKeys="true">
+    insert into root (rootName, rootUrl, rootConf, 
+      userId, rootPhone, createTime, 
+      updateTime)
+    values (#{rootname,jdbcType=VARCHAR}, #{rooturl,jdbcType=VARCHAR}, #{rootconf,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=INTEGER}, #{rootphone,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
   </insert>
-  <select id="getAllRoot" resultType="com.funong.funong.pojo.Root">
-    select * from root;
-  </select>
-  <select id="getRootByUserId" resultType="com.funong.funong.pojo.Root">
-    select * from root where userId=#{userid};
-  </select>
-  <insert id="insertSelective" parameterType="com.funong.funong.pojo.Root">
+  <insert id="insertSelective" keyColumn="rootId" keyProperty="rootid" parameterType="com.funong.funong.pojo.Root" useGeneratedKeys="true">
     insert into root
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="rootid != null">
-        rootId,
-      </if>
       <if test="rootname != null">
         rootName,
       </if>
@@ -54,9 +58,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="rootid != null">
-        #{rootid,jdbcType=VARCHAR},
-      </if>
       <if test="rootname != null">
         #{rootname,jdbcType=VARCHAR},
       </if>
@@ -80,4 +81,42 @@
       </if>
     </trim>
   </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.funong.funong.pojo.Root">
+    update root
+    <set>
+      <if test="rootname != null">
+        rootName = #{rootname,jdbcType=VARCHAR},
+      </if>
+      <if test="rooturl != null">
+        rootUrl = #{rooturl,jdbcType=VARCHAR},
+      </if>
+      <if test="rootconf != null">
+        rootConf = #{rootconf,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="rootphone != null">
+        rootPhone = #{rootphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rootId = #{rootid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.funong.funong.pojo.Root">
+    update root
+    set rootName = #{rootname,jdbcType=VARCHAR},
+      rootUrl = #{rooturl,jdbcType=VARCHAR},
+      rootConf = #{rootconf,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      rootPhone = #{rootphone,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where rootId = #{rootid,jdbcType=INTEGER}
+  </update>
 </mapper>

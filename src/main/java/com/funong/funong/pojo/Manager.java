@@ -2,8 +2,6 @@ package com.funong.funong.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -14,21 +12,44 @@ import lombok.Data;
 public class Manager implements Serializable {
     private Integer managerid;
 
+    /**
+     * 姓名
+     */
     private String managername;
 
+    /**
+     * 性别
+     */
     private String managersex;
 
+    /**
+     * 简介
+     */
     private String managerconf;
 
+    /**
+     * 年龄
+     */
     private String managerage;
 
+    /**
+     * 头像
+     */
     private String managerurl;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+
     private Date createtime;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+
     private Date updatetime;
 
+    /**
+     * 用户ID
+     */
     private Integer userid;
+
+    /**
+     * 电话
+     */
+    private String managerphone;
 
     private static final long serialVersionUID = 1L;
 }

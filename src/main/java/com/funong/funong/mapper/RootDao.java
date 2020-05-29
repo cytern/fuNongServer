@@ -1,21 +1,17 @@
 package com.funong.funong.mapper;
 
 import com.funong.funong.pojo.Root;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-@Mapper
-@Repository
 public interface RootDao {
+    int deleteByPrimaryKey(Integer rootid);
+
     int insert(Root record);
 
     int insertSelective(Root record);
 
-    List<Root> getAllRoot();
+    Root selectByPrimaryKey(Integer rootid);
 
-    Root getRootByUserId(Integer userid);
+    int updateByPrimaryKeySelective(Root record);
 
-
+    int updateByPrimaryKey(Root record);
 }
